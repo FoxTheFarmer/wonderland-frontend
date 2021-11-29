@@ -40,13 +40,13 @@ function NavContent() {
     return (
         <div className="dapp-sidebar">
             <div className="branding-header">
-                <Link href="https://wonderland.money" target="_blank">
+                <Link href="https://cyberdao.finance" target="_blank">
                     <img alt="" src={WonderlandIcon} />
                 </Link>
 
                 {address && (
                     <div className="wallet-link">
-                        <Link href={`https://cchain.explorer.avax.network/address/${address}`} target="_blank">
+                        <Link href={`https://blockexplorer.boba.network/address/${address}`} target="_blank">
                             <p>{shorten(address)}</p>
                         </Link>
                     </div>
@@ -130,12 +130,9 @@ function NavContent() {
                 </div>
             </div>
             <div className="dapp-menu-doc-link">
-                <Link href="https://wonderland.gitbook.io/wonderland/" target="_blank">
+                <Link href="https://cyberda0.medium.com/" target="_blank">
                     <img alt="" src={DocsIcon} />
                     <p>Docs</p>
-                </Link>
-                <Link href="https://legacy.wonderland.money/" target="_blank">
-                    <p>Legacy website</p>
                 </Link>
             </div>
             <Social />

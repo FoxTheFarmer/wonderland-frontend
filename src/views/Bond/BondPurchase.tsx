@@ -12,6 +12,7 @@ import useDebounce from "../../hooks/debounce";
 import { messages } from "../../constants/messages";
 import { warning } from "../../store/slices/messages-slice";
 import Zapin from "./Zapin";
+import { AVG_BLOCK_TIME } from "../../constants";
 
 interface IBondPurchaseProps {
     bond: IAllBondData;
@@ -33,7 +34,7 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
     });
 
     const vestingPeriod = () => {
-        return prettifySeconds(bond.vestingTerm, "day");
+        return prettifySeconds(bond.vestingTerm * AVG_BLOCK_TIME);
     };
 
     async function onBond() {
@@ -172,9 +173,9 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
                     </div>
                 )}
 
-                <div className="transaction-button bond-approve-btn" onClick={handleZapinOpen}>
+                {/*<div className="transaction-button bond-approve-btn" onClick={handleZapinOpen}>
                     <p>Zap</p>
-                </div>
+                </div> */}
 
                 {!hasAllowance() && !useAvax && (
                     <div className="help-text">
@@ -202,12 +203,12 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
 
                     <div className="data-row">
                         <p className="bond-balance-title">You Will Get</p>
-                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.bondQuote, 4)} TIME`}</p>
+                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.bondQuote, 4)} CYBER`}</p>
                     </div>
 
                     <div className={`data-row`}>
                         <p className="bond-balance-title">Max You Can Buy</p>
-                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.maxBondPrice, 4)} TIME`}</p>
+                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.maxBondPrice, 4)} CYBER`}</p>
                     </div>
 
                     <div className="data-row">
@@ -222,11 +223,11 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
 
                     <div className="data-row">
                         <p className="bond-balance-title">Minimum purchase</p>
-                        <p className="bond-balance-title">0.01 TIME</p>
+                        <p className="bond-balance-title">0.01 CYBER</p>
                     </div>
                 </Box>
             </Slide>
-            <Zapin open={zapinOpen} handleClose={handleZapinClose} bond={bond} />
+            {/* <Zapin open={zapinOpen} handleClose={handleZapinClose} bond={bond} /> */}
         </Box>
     );
 }

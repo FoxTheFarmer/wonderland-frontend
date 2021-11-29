@@ -10,6 +10,7 @@ import { IAllBondData } from "../../hooks/bonds";
 import { IUserBondDetails } from "../../store/slices/account-slice";
 import { messages } from "../../constants/messages";
 import { warning } from "../../store/slices/messages-slice";
+import { AVG_BLOCK_TIME } from "../../constants";
 
 interface IBondRedeem {
     bond: IAllBondData;
@@ -22,7 +23,7 @@ function BondRedeem({ bond }: IBondRedeem) {
     const isBondLoading = useSelector<IReduxState, boolean>(state => state.bonding.loading ?? true);
 
     const currentBlockTime = useSelector<IReduxState, number>(state => {
-        return state.app.currentBlockTime;
+        return state.app.currentBlock;
     });
 
     const pendingTransactions = useSelector<IReduxState, IPendingTxn[]>(state => {
@@ -56,7 +57,7 @@ function BondRedeem({ bond }: IBondRedeem) {
     };
 
     const vestingPeriod = () => {
-        return prettifySeconds(bondingState.vestingTerm, "day");
+        return prettifySeconds(bondingState.vestingTerm * AVG_BLOCK_TIME);
     };
 
     return (
@@ -86,11 +87,11 @@ function BondRedeem({ bond }: IBondRedeem) {
                 <Box className="bond-data">
                     <div className="data-row">
                         <p className="bond-balance-title">Pending Rewards</p>
-                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.interestDue, 4)} TIME`}</p>
+                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.interestDue, 4)} CYBER`}</p>
                     </div>
                     <div className="data-row">
                         <p className="bond-balance-title">Claimable Rewards</p>
-                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.pendingPayout, 4)} TIME`}</p>
+                        <p className="price-data bond-balance-title">{isBondLoading ? <Skeleton width="100px" /> : `${trim(bond.pendingPayout, 4)} CYBER`}</p>
                     </div>
                     <div className="data-row">
                         <p className="bond-balance-title">Time until fully vested</p>

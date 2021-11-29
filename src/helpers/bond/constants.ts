@@ -12,4 +12,6 @@ export interface BondAddresses {
 
 export interface NetworkAddresses {
     [Networks.AVAX]: BondAddresses;
+    [Networks.BOBA]: BondAddresses;
+    [Networks.RINKEBY]: BondAddresses;
 }

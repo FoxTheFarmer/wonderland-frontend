@@ -65,6 +65,8 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
                     options: {
                         rpc: {
                             [Networks.AVAX]: getMainnetURI(),
+                            [Networks.BOBA]: getMainnetURI(),
+                            [Networks.RINKEBY]: getMainnetURI(),
                         },
                     },
                 },
@@ -118,7 +120,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
 
         setProviderChainID(chainId);
 
-        if (chainId === Networks.AVAX) {
+        if (chainId === Networks.BOBA || chainId === Networks.RINKEBY) {
             setProvider(connectedProvider);
         }
 
